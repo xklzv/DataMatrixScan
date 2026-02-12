@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DataMatrixScan</string>
+    <string name="cancel">Отменить</string>
+    <string name="save">Сохранить</string>
+    <string name="history">История</string>
+    <string name="scan">Сканировать</string>
+    <string name="scanned">Отсканированный код:</string>
 </resources>
