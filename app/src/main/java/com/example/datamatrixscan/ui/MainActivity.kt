@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.scannedCode.observe(this) { code ->
-            if (code != null) {
-                tvScannedCode.text = code
+        viewModel.displayCode.observe(this) { displayCode ->
+            if (displayCode != null) {
+                tvScannedCode.text = "Отсканированный код:\n$displayCode"
                 tvScannedCode.visibility = TextView.VISIBLE
                 btnScan.visibility = Button.GONE
                 layoutActions.visibility = LinearLayout.VISIBLE

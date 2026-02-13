@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-   <TextView
+    <TextView
         android:id="@+id/tvScannedCode"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
+        android:maxHeight="200dp"
+        android:scrollbars="vertical"
         android:text="@string/scanned"
         android:textSize="18sp"
         android:visibility="gone"
@@ -19,7 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
-
     <Button
         android:id="@+id/btnScan"
         android:layout_width="wrap_content"
