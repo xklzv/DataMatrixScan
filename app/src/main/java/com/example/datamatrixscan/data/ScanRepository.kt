@@ -9,8 +9,7 @@ class ScanRepository(private val dao: ScanRecordDao) {
         val result = dao.insert(record)
         return result != 0L
     }
-
+    suspend fun isCodeExists(code: String): Boolean = dao.isCodeExists(code)
     fun getAllScans(): Flow<List<ScanRecord>> = dao.getAllRecords()
 
-    suspend fun isCodeExists(code: String): Boolean = dao.isCodeExists(code)
 }

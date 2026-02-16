@@ -9,11 +9,9 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: ScanRepository) : ViewModel() {
 
-    // Исходный код (с разделителями) – сохраняем в БД
     private val _scannedCode = MutableLiveData<String?>()
     val scannedCode: LiveData<String?> = _scannedCode
 
-    // Код для отображения (с разделителями, заменёнными на \n)
     private val _displayCode = MutableLiveData<String?>()
     val displayCode: LiveData<String?> = _displayCode
 
@@ -38,8 +36,8 @@ class MainViewModel(private val repository: ScanRepository) : ViewModel() {
     fun saveCurrentCode() {
         val code = _scannedCode.value ?: return
         viewModelScope.launch {
-            val success = repository.insertScan(code)
-            if (success) {
+            if (!repository.isCodeExists(code)) {
+                repository.insertScan(code)
                 _messageEvent.value = "Код сохранён"
                 clearScannedCode()
             } else {
@@ -52,10 +50,7 @@ class MainViewModel(private val repository: ScanRepository) : ViewModel() {
         _messageEvent.value = null
     }
 
-    // Преобразует исходный код: заменяет символы-разделители на \n
     private fun formatCodeForDisplay(code: String): String {
-        // Заменяем распространённые разделители: GS (0x1D), RS (0x1E), US (0x1F)
-        // При необходимости можно добавить другие символы
         return code
             .replace(Char(0x1D), '\n')  // Group Separator
             .replace(Char(0x1E), '\n')  // Record Separator

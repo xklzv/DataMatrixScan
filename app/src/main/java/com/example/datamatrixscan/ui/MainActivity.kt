@@ -1,7 +1,7 @@
 package com.example.datamatrixscan.ui
 
 
-
+import android.content.pm.ActivityInfo
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -14,7 +14,7 @@ import com.example.datamatrixscan.App
 import com.example.datamatrixscan.R
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
-
+import com.example.datamatrixscan.ui.PortraitCaptureActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.displayCode.observe(this) { displayCode ->
             if (displayCode != null) {
-                tvScannedCode.text = "Отсканированный код:\n$displayCode"
+                tvScannedCode.text = "Отсканированный код: \n$displayCode"
                 tvScannedCode.visibility = TextView.VISIBLE
                 btnScan.visibility = Button.GONE
                 layoutActions.visibility = LinearLayout.VISIBLE
@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             val options = ScanOptions()
             options.setBeepEnabled(false)
             options.setOrientationLocked(true)
+            options.setCaptureActivity(PortraitCaptureActivity::class.java)
             scanLauncher.launch(options)
         }
 
